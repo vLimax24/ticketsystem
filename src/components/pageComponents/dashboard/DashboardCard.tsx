@@ -1,8 +1,11 @@
 import React from 'react'
+import DashboardFetch from './DashboardFetch'
 
 const DashboardCard = () => {
   return (
-    <div>DashboardCard</div>
+    <div>
+        <DashboardFetch />
+    </div>
   )
 }
 

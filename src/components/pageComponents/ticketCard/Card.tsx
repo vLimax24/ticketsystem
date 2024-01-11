@@ -32,8 +32,6 @@ export function CardForm() {
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
-        console.log(projectId, name, description, relevance);
-        console.log('works');
     
         const res = await fetch('api/issues', {
           method: 'POST',
