@@ -7,8 +7,10 @@ const Navbar = () => {
         <NavbarLayout>
             <NavbarLogo />
             <NavbarLinks />
-            <NavbarDarkMode />
-            <NavbarLogin />
+            <div className='flex'>
+              <NavbarLogin />
+              <NavbarDarkMode />
+            </div>
         </NavbarLayout>
     </>
   )

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { signIn, useSession, signOut } from 'next-auth/react'
-import { Button, ButtonProps } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -13,7 +13,7 @@ const NavbarLogin = (): JSX.Element => {
     
     if (status === "authenticated") {
         return (
-          <div className="flex gap-5">
+          <div className="flex gap-5 mr-10">
             <Link href={'/dashboard'}>
             <Image
               src={session?.user?.image}
@@ -28,7 +28,7 @@ const NavbarLogin = (): JSX.Element => {
         );
       }
     
-      return <Button onClick={() => signIn("github")}>Sign In</Button>;
+      return <Button onClick={() => signIn("github")} className='mr-10'>Sign In</Button>;
 }
 
 export default NavbarLogin
