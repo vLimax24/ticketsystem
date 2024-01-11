@@ -4,11 +4,11 @@ import Report from '../../models/issues'
 import mongoose from 'mongoose'
 
 export async function POST(req) {
-    const { projectId, name, description, relevance } = await req.json()
+    const { projectId, name, description, relevance, email } = await req.json()
 
     try {
         await connect()
-        await Report.create({ projectId, name, description, relevance })
+        await Report.create({ projectId, name, description, relevance, email })
 
         return NextResponse.json({
             msg: ['Message sent successfully']

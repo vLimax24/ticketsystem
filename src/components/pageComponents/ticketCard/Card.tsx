@@ -24,6 +24,7 @@ import { Textarea } from "@/components/ui/textarea"
 export function CardForm() {
     const [projectId, setProjectId] = useState("")
     const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
     const [description, setDescription] = useState("")
     const [relevance, setRelevance] = useState("")
     const [error, setError] = useState([])
@@ -44,6 +45,7 @@ export function CardForm() {
             name: name,
             description: description,
             relevance: relevance,
+            email: email,
           }),
         });
         const { msg } = await res.json();
@@ -59,6 +61,7 @@ export function CardForm() {
         setName("");
         setDescription("");
         setRelevance("");
+        setEmail("");
       };
   return (
     <Card className="w-[350px]">
@@ -87,6 +90,10 @@ export function CardForm() {
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Name</Label>
               <Input id="name" placeholder="Name of your project" onChange={(e) => setName(e.target.value)} value={name}/>
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Label htmlFor="email">Email of the Recipiant</Label>
+              <Input id="name" placeholder="Enter the Email of your recipiant" onChange={(e) => setEmail(e.target.value)} value={email}/>
             </div>
             <div>
                 <Label htmlFor="description">Description</Label>

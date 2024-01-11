@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavbarLayout, NavbarLogo, NavbarLinks, NavbarDarkMode } from '../navbar/index'
+import { NavbarLayout, NavbarLogo, NavbarLinks, NavbarDarkMode, NavbarLogin } from '../navbar/index'
 
 const Navbar = () => {
   return (
@@ -8,6 +8,7 @@ const Navbar = () => {
             <NavbarLogo />
             <NavbarLinks />
             <NavbarDarkMode />
+            <NavbarLogin />
         </NavbarLayout>
     </>
   )

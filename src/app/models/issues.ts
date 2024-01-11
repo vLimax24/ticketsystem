@@ -1,11 +1,25 @@
 import mongoose, { Schema } from 'mongoose'
 
-const issueSchema = new Schema({
+interface ReportModel {
+    _id: string;
+    projectId: number;
+    name: string;
+    email: string;
+    description: string;
+    relevance: string;
+    date: Date;
+}
+
+const issueSchema = new Schema<ReportModel>({
     projectId: {
         type: Number,
         required: [true, 'Project ID is required'],
     },
     name: {
+        type: String,
+        required: [true, 'Name is required'],
+    },
+    email: {
         type: String,
         required: [true, 'Name is required'],
     },
@@ -23,6 +37,6 @@ const issueSchema = new Schema({
     }
 })
 
-const Report = mongoose.models.Report || mongoose.model('Report', issueSchema)
+const Report = mongoose.models.Report || mongoose.model<ReportModel>('Report', issueSchema)
 
 export default Report
