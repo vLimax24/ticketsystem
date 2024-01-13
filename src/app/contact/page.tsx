@@ -14,14 +14,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
-export function CardForm() {
+export function Contact() {
     const [projectId, setProjectId] = useState("")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [description, setDescription] = useState("")
-    const [relevance, setRelevance] = useState("")
-    const [error, setError] = useState([])
-    const [message, setMessage] = useState("")
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
@@ -29,7 +26,6 @@ export function CardForm() {
         setProjectId("");
         setName("");
         setDescription("");
-        setRelevance("");
         setEmail("");
       };
   return (
@@ -65,4 +61,4 @@ export function CardForm() {
   )
 }
 
-export default CardForm
+export default Contact
