@@ -62,7 +62,7 @@ export function CardForm() {
         setEmail("");
       };
   return (
-    <Card className="w-[350px]">
+    <Card className="w-[500px]">
       <CardHeader>
         {message && (
             <div

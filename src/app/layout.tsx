@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from "../components/funcComponents/ThemeProvider"
-import { Navbar } from '../components'
+import { Navbar, Footer } from '../components'
 import { NextAuthProvider } from "../components/funcComponents/AuthProvider";
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" >
+      <body className={`${inter.className}`}>
         <NextAuthProvider>
           <ThemeProvider
               attribute="class"
@@ -29,6 +29,7 @@ export default function RootLayout({
           >
             <Navbar />
               {children}
+            <Footer />
           </ThemeProvider>
         </NextAuthProvider>
       </body>
