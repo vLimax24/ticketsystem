@@ -51,10 +51,10 @@ const DashboardFetch: React.FC = () => {
       if (response.ok) {
         setReports(prevReports => prevReports.filter(report => report._id !== reportId));
       } else {
-        // console.error('Error deleting report:', response.statusText);
+         console.error('Error deleting report:', response.statusText);
       }
     } catch (error) {
-      // console.error('Error marking report as done:', error);
+       console.error('Error marking report as done:', error);
     }
   };
 
