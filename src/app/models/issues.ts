@@ -1,7 +1,7 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Schema, ObjectId } from 'mongoose'
 
 interface ReportModel {
-    _id: string;
+    _id: ObjectId;
     projectId: number;
     name: string;
     email: string;

@@ -11,3 +11,7 @@ export const GET = async (request) => {
         return new NextResponse("Error in searching Products", error, { status: 500})
     }
 }
+
+
+
+
