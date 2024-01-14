@@ -119,7 +119,7 @@ const DashboardFetch: React.FC = () => {
       <Drawer>
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
         {reports.map(report => (
-          <Card className="w-[400px] mx-10 my-10 overflow-hidden" key={report?._id}>
+          <Card className="sm:w-[300px] md:w-[400px] lg:w-[450px] mx-10 my-10 overflow-hidden" key={report?._id}>
             <CardHeader>
               <CardTitle>{report.name}</CardTitle>
             </CardHeader>
