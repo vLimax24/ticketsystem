@@ -145,13 +145,13 @@ const DashboardFetch: React.FC = () => {
                   Mark as done
                 </Button>
                 <DrawerTrigger asChild>
-                  <Button className='w-full mt-3' variant={'outline'} onClick={() => idModifyer(report?._id)}>Re-asign Task</Button>
+                  <Button className='w-full mt-3' variant={'outline'} onClick={() => idModifyer(report?._id)}>Re-assign Task</Button>
                 </DrawerTrigger>
             </CardFooter>
             <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
-            <DrawerTitle>Re-asign</DrawerTitle>
+            <DrawerTitle>Re-assign</DrawerTitle>
             <DrawerDescription>Enter the new Email to re-asign the task</DrawerDescription>
           </DrawerHeader>
           <div className="p-4 pb-0">
@@ -161,7 +161,9 @@ const DashboardFetch: React.FC = () => {
             </div>
           </div>
           <DrawerFooter>
+            <DrawerClose asChild>
             <Button onClick={() => reassignTask(report?._id)}>Submit</Button>
+            </DrawerClose>
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
             </DrawerClose>
