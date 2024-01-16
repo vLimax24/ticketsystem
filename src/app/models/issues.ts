@@ -7,6 +7,7 @@ interface ReportModel {
     email: string;
     description: string;
     relevance: string;
+    
     date: Date;
 }
 

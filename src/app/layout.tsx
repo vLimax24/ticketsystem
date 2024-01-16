@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from "../components/funcComponents/ThemeProvider"
 import { Navbar, Footer } from '../components'
 import { NextAuthProvider } from "../components/funcComponents/AuthProvider";
+import { EdgeStoreProvider } from '../lib/edgestore';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,18 +21,20 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body className={`${inter.className}`}>
-        <NextAuthProvider>
-          <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-          >
-            <Navbar />
-              {children}
-            <Footer />
-          </ThemeProvider>
-        </NextAuthProvider>
+        <EdgeStoreProvider>
+          <NextAuthProvider>
+            <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+            >
+              <Navbar />
+                {children}
+              <Footer />
+            </ThemeProvider>
+          </NextAuthProvider>
+        </EdgeStoreProvider>
       </body>
     </html>
   )

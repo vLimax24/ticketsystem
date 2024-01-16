@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { MultiFileInstant } from './index'
 
 type AcceptedFiles = File[];
 
@@ -136,31 +137,7 @@ export function CardForm() {
             </div>
           </div>
             <div>
-              {/* Dropzone section */}
-              <div
-                {...getRootProps()}
-                className="border-dashed border-2 p-4 rounded-md cursor-pointer text-center mt-10"
-              >
-                <input {...getInputProps()} />
-                <p className="text-gray-600">
-                  <span className="text-2xl mb-2 block">📂</span>
-                  Drag and drop your files here, or click to select files
-                </p>
-              </div>
-
-              {/* Display the dropped files */}
-              {droppedFiles.length > 0 && (
-                <div className="mt-4">
-                  <p className="text-green-600 font-bold mb-2">Selected Files:</p>
-                  <ul className="list-disc list-inside">
-                    {droppedFiles.map((file, index) => (
-                      <li key={index} className="text-blue-500">
-                        {file.name} - {formatFileSize(file.size)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <MultiFileInstant />
             </div>
         </form>
       </CardContent>
