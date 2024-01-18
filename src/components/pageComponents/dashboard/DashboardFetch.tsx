@@ -127,7 +127,7 @@ const DashboardFetch: React.FC = () => {
               <div className="grid w-full items-center gap-4">
               <div>
                   <Label htmlFor="status">Status</Label>
-                  <CardDescription>{report?.status == 0? "In Progress" : (report?.status == 1 ? "Resolved" : "Closed")}</CardDescription>
+                  <CardDescription>{report?.status}</CardDescription>
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name">Description</Label>

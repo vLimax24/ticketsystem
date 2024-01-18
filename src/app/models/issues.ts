@@ -5,7 +5,7 @@ interface ReportModel {
     projectId: number;
     name: string;
     email: string;
-    status: number;
+    status: string;
     description: string;
     relevance: string;
     date: Date;
@@ -25,8 +25,8 @@ const issueSchema = new Schema<ReportModel>({
         required: [true, 'Name is required'],
     },
     status: {
-        type: Number,
-        default: 0,
+        type: String,
+        default: "PENDING",
         required: [true, 'status is required']
     },
     description: {

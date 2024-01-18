@@ -9,7 +9,7 @@ import Link from 'next/link'
 const DashboardTasks = () => {
     const { data: session, status } = useSession()
     if(status === 'loading') {
-        return <div>Loading...</div>
+        return <div className='ml-10'>Loading...</div>
     } else if(status === 'authenticated') {
         return (
             <>
