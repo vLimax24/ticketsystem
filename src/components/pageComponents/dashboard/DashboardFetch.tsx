@@ -125,6 +125,10 @@ const DashboardFetch: React.FC = () => {
             </CardHeader>
             <CardContent>
               <div className="grid w-full items-center gap-4">
+              <div>
+                  <Label htmlFor="status">Status</Label>
+                  <CardDescription>{report?.status}</CardDescription>
+                </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label htmlFor="name">Description</Label>
                   <CardDescription className={expandedDescription === report._id ? '' : 'line-clamp-1 cursor-pointer'} onClick={() => toggleDescription(report._id)}>{report?.description}</CardDescription>
