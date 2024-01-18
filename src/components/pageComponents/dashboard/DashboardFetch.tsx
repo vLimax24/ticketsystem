@@ -28,6 +28,7 @@ interface Report {
   name: string;
   email: string;
   description: string;
+  status: string;
   relevance: string;
   date: string;
   __v: number;
