@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/drawer"
 import { Input } from "@/components/ui/input"
 import Link from 'next/link'
+import Combobox from './Combobox'
 import { Badge } from "@/components/ui/badge"
 interface Report {
   _id: string;
@@ -114,7 +115,7 @@ const DashboardFetch: React.FC = () => {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
   };
 
-  const getTailwindClasses = (relevance:any) => {
+  const getTailwindClasses = (relevance: any) => {
     switch (relevance) {
       case 'critical':
         return 'bg-red-600';
@@ -131,21 +132,22 @@ const DashboardFetch: React.FC = () => {
       case 'trivial':
         return 'bg-green-500';
       case 'PENDING':
-        return 'bg-blue-800';
-      case 'PROGRESS':
-        return 'bg-blue-700';
-      case 'HOLD':
-        return 'bg-blue-600';
-      case 'CANCELLED':
-        return 'bg-blue-500';
-      case 'COMPLETED':
         return 'bg-blue-400';
+      case 'PROGRESS':
+        return 'bg-blue-600';
+      case 'HOLD':
+        return 'bg-violet-600';
+      case 'CANCELLED':
+        return 'bg-red-800';
+      case 'COMPLETED':
+        return 'bg-blue-700';
+      case 'INITIATED':
+        return 'bg-blue-500';
       default:
         return '';
     }
   };
-
-
+  
   return (
     <div >
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
@@ -174,10 +176,11 @@ const DashboardFetch: React.FC = () => {
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="flex justify-between w-full flex-col">
-                <Link href={`/dashboard/${report?._id}`} className='w-full'>
-                  <Button className='w-full mt-3' onClick={() => idModifyer(report?._id)}>See More</Button>
+            <CardFooter className="flex justify-between w-full items-center">
+                <Link href={`/dashboard/${report?._id}`} className='w-full mr-5'>
+                  <Button className='w-full' onClick={() => idModifyer(report?._id)}>See More</Button>
                 </Link>
+                <Combobox reportId={report?._id} />
             </CardFooter>
           </Card>
           
