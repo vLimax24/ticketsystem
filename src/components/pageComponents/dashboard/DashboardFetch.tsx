@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -8,22 +8,12 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer"
-import { Input } from "@/components/ui/input"
-import Link from 'next/link'
-import Combobox from './Combobox'
-import { Badge } from "@/components/ui/badge"
+} from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import Link from 'next/link';
+import Combobox from './Combobox';
+import { Badge } from '@/components/ui/badge';
+
 interface Report {
   _id: string;
   projectId: string;
@@ -147,10 +137,19 @@ const DashboardFetch: React.FC = () => {
         return '';
     }
   };
+
+  const updateStatusLocally = useCallback((selectedStatus:any, reportId:any) => {
+    // Update the status locally without making an API call
+    setReports((prevReports) =>
+      prevReports.map((report) =>
+        report._id === reportId ? { ...report, status: selectedStatus } : report
+      )
+    );
+  }, [setReports]);
   
   return (
-    <div className=''>
-      <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-full'>
+    <div className='gap-0'>
+      <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 max-w-full gap-0'>
         {reports.map(report => (
           <Card className="mx-10 my-10 overflow-hidden" key={report?._id}>
             <CardHeader>
@@ -180,7 +179,7 @@ const DashboardFetch: React.FC = () => {
                 <Link href={`/dashboard/${report?._id}`} className='w-full mr-5'>
                   <Button className='w-full' onClick={() => idModifyer(report?._id)}>See More</Button>
                 </Link>
-                <Combobox reportId={report?._id} />
+                <Combobox reportId={report?._id} onUpdateStatusLocally={updateStatusLocally} />
             </CardFooter>
           </Card>
           
