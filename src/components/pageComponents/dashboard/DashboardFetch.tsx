@@ -27,6 +27,7 @@ interface Report {
   projectId: string;
   name: string;
   email: string;
+  status: string;
   description: string;
   relevance: string;
   date: string;
