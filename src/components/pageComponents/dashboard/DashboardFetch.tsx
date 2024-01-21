@@ -56,52 +56,6 @@ const DashboardFetch: React.FC = () => {
     fetchData();
   }, [session]);
 
-  const markAsDone = async (reportId: string) => {
-    try {
-      const response = await fetch(`/api/tasks/${reportId}`, {
-        method: 'DELETE',
-      });
-  
-      if (response.ok) {
-        setReports(prevReports => prevReports.filter(report => report._id !== reportId));
-      } else {
-         console.error('Error deleting report:', response.statusText);
-      }
-    } catch (error) {
-       console.error('Error marking report as done:', error);
-    }
-  };
-
-  const reassignTask = async (reportId: string) => {
-    try {
-      const response = await fetch(`/api/tasks/update/${reportId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ newEmail }), // Sending newEmail in the request body
-      });
-  
-      if (response.ok) {
-        // Handle success, e.g., update state or perform additional actions
-        const result = await response.json();
-        console.log(result.message);
-  
-        // Remove the updated report from the local state
-        setReports((prevReports) =>
-          prevReports.map((report) =>
-            report._id === reportId
-              ? { ...report, email: result.email } // assuming 'email' is the property you updated
-              : report
-          )
-        );
-      } else {
-        console.error('Error re-assigning task:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error re-assigning task:', error);
-    }
-  };
   const idModifier = (reportId: string) => {
     // Dispatch the action to update the id in Redux store
     dispatch(setId(reportId));
