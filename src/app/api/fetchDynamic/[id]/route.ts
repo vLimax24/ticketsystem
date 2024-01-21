@@ -16,7 +16,7 @@ export const GET = async (
     const detailedCard = await Report.findOne({ _id: id });
 
     if (detailedCard) {
-      console.log('Found the card:', detailedCard);
+      // console.log('Found the card:', detailedCard);
       return new NextResponse(JSON.stringify(detailedCard), { status: 200 });
     } else {
       console.error('Report not found ID:', id);

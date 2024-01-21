@@ -1,6 +1,10 @@
+'use client'
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
+import { useSelector, useDispatch } from 'react-redux'
+import { setId } from '../../../redux/slices/idSlice'
 import {
   Card,
   CardContent,
@@ -32,17 +36,17 @@ const DashboardFetch: React.FC = () => {
   const [reports, setReports] = useState<Report[]>([]);
   const [expandedDescription, setExpandedDescription] = useState<string | null>(null);
   const [email, setEmail] = useState("")
-  const [id, setId] = useState('')
   const [newEmail, setNewEmail] = useState('')
- 
 
+  const id = useSelector((state: any) => state.id.id);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/api/tasks');
         const data: Report[] = await response.json();
-        const userReports = data.filter(report => report.email === session?.user?.email);
+        const userReports = data.filter((report) => report.email === session?.user?.email);
         setReports(userReports);
       } catch (error) {
         console.error('Error fetching reports:', error);
@@ -98,9 +102,10 @@ const DashboardFetch: React.FC = () => {
       console.error('Error re-assigning task:', error);
     }
   };
-  const idModifyer = (reportId: string) => {
-    setId(reportId)
-  }
+  const idModifier = (reportId: string) => {
+    // Dispatch the action to update the id in Redux store
+    dispatch(setId(reportId));
+  };
 
   const capitalizeFirstLetter = (text:any) => {
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
@@ -147,6 +152,10 @@ const DashboardFetch: React.FC = () => {
       )
     );
   }, [setReports]);
+
+    useEffect(() => {
+    console.log(id)
+  }, [id])
   
   return (
     <div className='gap-0'>
@@ -178,7 +187,7 @@ const DashboardFetch: React.FC = () => {
             </CardContent>
             <CardFooter className="flex justify-between w-full items-center">
                 <Link href={`/dashboard/${report?._id}`} className='w-full mr-5'>
-                  <Button className='w-full' onClick={() => idModifyer(report?._id)}>See More</Button>
+                  <Button className='w-full' onClick={() => idModifier(report?._id)}>See More</Button>
                 </Link>
                 <Combobox reportId={report?._id} onUpdateStatusLocally={updateStatusLocally} />
             </CardFooter>
@@ -188,6 +197,8 @@ const DashboardFetch: React.FC = () => {
       </ul>
     </div>
   );
+
+
 };
 
 export default DashboardFetch;
