@@ -121,6 +121,11 @@ const Detail: React.FC = () => {
       {/* Main Content */}
       <div className="w-3/4">
         <h1>{data?.name}</h1>
+        <h1>{data?.description}</h1>
+        <h1>{data?.relevance}</h1>
+        <h1>{data?.status}</h1>
+        <h1>{data?.email}</h1>
+        <h1>{data?.date}</h1>
       </div>
       {/* Sidebar */}
     </div>
