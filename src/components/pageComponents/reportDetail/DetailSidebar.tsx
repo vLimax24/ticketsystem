@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useState } from "react";
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
+import { useSession } from 'next-auth/react'
 
 interface SidebarContextProps {
   expanded: boolean;
@@ -13,6 +14,7 @@ const SidebarContext = createContext<SidebarContextProps>(defaultSidebarContext)
 
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   const [expanded, setExpanded] = useState(false);
+  const { data: session, status }: { data: any, status: string } = useSession()
 
   return (
     <aside className="h-screen text-black border-t">
@@ -32,7 +34,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
 
         <div className="border-t flex p-3">
           <img
-            src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
+            src={session?.user?.image}
             alt=""
             className="w-10 h-10 rounded-md"
           />
