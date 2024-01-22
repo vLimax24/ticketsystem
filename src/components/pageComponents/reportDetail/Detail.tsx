@@ -1,10 +1,5 @@
-"use client";
+'use client'
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-
-import { useParams } from 'next/navigation';
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,8 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { buttonVariants } from "@/components/ui/button";
-
+import { useSelector } from "react-redux";
+import { Check, Delete, Redo } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,115 +21,121 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Textarea } from "@/components/ui/textarea";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
-interface Report {
-  _id: string;
-  projectId: string;
+
+interface YourDataType {
   name: string;
-  email: string;
-  statu: string;
   description: string;
-  relevance: string;
-  date: string;
-  __v: number;
+  relevance: string,
+  status: string,
+  date: string,
+  email: string,
+  // Add more properties if needed
 }
 
+
+
 const Detail: React.FC = () => {
-  const { data: session } = useSession();
-  const [report, setReport] = useState<Report>();
-  const params = useParams<{ tag: string; item: string }>();
+  const id = useSelector((state: any) => state.id.id);
+  const [data, setData] = useState<YourDataType | null>(null);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+
+/*   const markAsDone = async (reportId: string) => {
+    try {
+      const response = await fetch(`/api/tasks/${reportId}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        setReports(prevReports => prevReports.filter(report => report._id !== reportId));
+      } else {
+         console.error('Error deleting report:', response.statusText);
+      }
+    } catch (error) {
+       console.error('Error marking report as done:', error);
+    }
+  };
+  
+  const reassignTask = async (reportId: string) => {
+    try {
+      const response = await fetch(`/api/tasks/update/${reportId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ newEmail }), // Sending newEmail in the request body
+      });
+  
+      if (response.ok) {
+        // Handle success, e.g., update state or perform additional actions
+        const result = await response.json();
+        console.log(result.message);
+  
+        // Remove the updated report from the local state
+        setReports((prevReports) =>
+          prevReports.map((report) =>
+            report._id === reportId
+              ? { ...report, email: result.email } // assuming 'email' is the property you updated
+              : report
+          )
+        );
+      } else {
+        console.error('Error re-assigning task:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error re-assigning task:', error);
+    }
+  }; */
+
 
   useEffect(() => {
-    // const {_id} = router
-
     const fetchData = async () => {
       try {
-        // const response = await fetch(`/api/tasks/${params._id}}`)
-        const response = await fetch(`/api/tasks/65a980539606852c0e0ead91`)
-        // const data: Report = {
-        //   _id: "2342342",
-        //   projectId: "123123",
-        //   name: "ProguardSeoTest",
-        //   email: "proguardseo@gmail.com",
-        //   statu: "PENDING",
-        //   description:
-        //     "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui fuga vitae inventore asperiores reiciendis, nostrum impedit nesciunt veniam beatae, voluptatem amet modi ipsum nobis, maiores adipisci molestiae ex nemo debitis.",
-        //   relevance: "Critical",
-        //   date: "2024-03-01",
-        //   __v: 1,
-        // };
-
-        const data: Report = await response.json()
-        setReport(data);
+        const response = await fetch(`/api/fetchDynamic/${id}`);
+        const fetchedData: YourDataType = await response.json();
+        fetchedData.date = new Date(fetchedData.date).toLocaleDateString("de-DE");
+        setData(fetchedData);
       } catch (error) {
-        console.log("Error fetching reports:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-  }, [session]);
+  }, [id]);
 
   return (
-    <div className="grid grid-cols-3">
-      <div className="col-span-2 p-4 border-solid border-2 border-r-2 border-light-green-500">
-        <div className="flex flex-col">
-          <div className="flex">
-            <h2 className="text-2xl font-bold mr-5">{report?.name}</h2>
-            <div className="float-right">
-              <Button variant="outline" size="icon">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-          <div className="mt-4">
-            <Label className="block text-base">Priority</Label>
-            <Label className="text-base text-gray-100">{report?.relevance}</Label>
-          </div>
-          <div className="mt-4">
-            <Label className="block text-base">Product Id</Label>
-            <Label className="text-base text-gray-100">{report?.projectId}</Label>
-          </div>
-          <div className="mt-4">
-            <Label className="block text-base">Relevance</Label>
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <Button variant="outline">{report?.statu}</Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>PENDING</DropdownMenuItem>
-                <DropdownMenuItem>STARTED</DropdownMenuItem>
-                <DropdownMenuItem>FINISHED</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          <div className="grid grid-cols-3 mt-4 gap-4">
-            <div className="col-span-2">
-              <Label className="block text-base">Description</Label>
-              <div className="rounded-md border-2 mt-2">
-                {report?.description}
-              </div>
-            </div>
-            <div className="">
-              <Label className="block text-base">Attached Files</Label>
-              <div className="mt-2">
-                <Button className="w-full">abc...</Button>
-                <Button className="w-full mt-2">abc...</Button>
-                <Button className="w-full mt-2">abc...</Button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="flex min-h-screen w-full box-border">
+      {/* Main Content */}
+      <div className="p-4 w-3/4">
+        <h1>{data?.name}</h1>
       </div>
-      <div className="p-4">
-        <div className="">
-          <Button className="w-full">Mark As Done</Button>
-          <Button className="w-full mt-3">Re-assign Task</Button>
-          <Button className="w-full mt-3" variant="outline">
+      {/* Sidebar */}
+      <div
+        className={`p-4 flex-1 flex items-center flex-col fixed transition-all duration-300`}
+        onMouseEnter={() => setIsSidebarHovered(true)}
+        onMouseLeave={() => setIsSidebarHovered(false)}
+      >
+        <Button className={`mt-2 w-[90%] flex items-center ${isSidebarHovered ? "" : "bg-transparent"}`}>
+          <Check size={20} className="mr-2" />
+          <span className={`label ${isSidebarHovered ? "opacity-100" : "opacity-0"}`}>
+            Mark as done
+          </span>
+        </Button>
+        <Button className="mt-2 w-[90%] flex items-center" variant={"outline"}>
+          <Redo size={20} className="mr-2" />
+          <span className={`label ${isSidebarHovered ? "opacity-100" : "opacity-0"}`}>
+            Re-assign Task
+          </span>
+        </Button>
+        <Button
+          className="mt-2 w-[90%] flex items-center bg-red-600 text-white"
+        >
+          <Delete size={20} className="mr-2" />
+          <span className={`label ${isSidebarHovered ? "opacity-100" : "opacity-0"}`}>
             Delete Task
-          </Button>
-        </div>
+          </span>
+        </Button>
+        {/* Add more sidebar components as needed */}
       </div>
     </div>
   );
