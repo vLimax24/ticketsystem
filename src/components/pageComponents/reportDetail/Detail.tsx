@@ -1,6 +1,8 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import DetailSidebar from './DetailSidebar'
+import { SidebarItem } from "./DetailSidebar";
 import {
   Card,
   CardContent,
@@ -12,7 +14,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSelector } from "react-redux";
-import { Check, Delete, Redo } from 'lucide-react'
+import { Check, Delete, Redo, LayoutDashboard, BarChart3, UserCircle, Boxes, Package, Receipt, Settings, LifeBuoy } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -105,38 +107,22 @@ const Detail: React.FC = () => {
 
   return (
     <div className="flex min-h-screen w-full box-border">
+      <DetailSidebar>
+        <SidebarItem icon={<LayoutDashboard size={20}/>} text='Dashboard' active/>
+        <SidebarItem icon={<BarChart3 size={20}/>} text='Statistics'/>
+        <SidebarItem icon={<UserCircle size={20}/>} text='Users'/>
+        <SidebarItem icon={<Boxes size={20}/>} text='Inventory'/>
+        <SidebarItem icon={<Package size={20}/>} text='Order' alert/>
+        <SidebarItem icon={<Receipt size={20}/>} text='Billings'/>
+        <hr className="my-3"/>
+        <SidebarItem icon={<Settings size={20}/>} text='Settings'/>
+        <SidebarItem icon={<LifeBuoy size={20}/>} text='Help'/>
+      </DetailSidebar>
       {/* Main Content */}
-      <div className="p-4 w-3/4">
+      <div className="w-3/4">
         <h1>{data?.name}</h1>
       </div>
       {/* Sidebar */}
-      <div
-        className={`p-4 flex-1 flex items-center flex-col fixed transition-all duration-300`}
-        onMouseEnter={() => setIsSidebarHovered(true)}
-        onMouseLeave={() => setIsSidebarHovered(false)}
-      >
-        <Button className={`mt-2 w-[90%] flex items-center ${isSidebarHovered ? "" : "bg-transparent"}`}>
-          <Check size={20} className="mr-2" />
-          <span className={`label ${isSidebarHovered ? "opacity-100" : "opacity-0"}`}>
-            Mark as done
-          </span>
-        </Button>
-        <Button className="mt-2 w-[90%] flex items-center" variant={"outline"}>
-          <Redo size={20} className="mr-2" />
-          <span className={`label ${isSidebarHovered ? "opacity-100" : "opacity-0"}`}>
-            Re-assign Task
-          </span>
-        </Button>
-        <Button
-          className="mt-2 w-[90%] flex items-center bg-red-600 text-white"
-        >
-          <Delete size={20} className="mr-2" />
-          <span className={`label ${isSidebarHovered ? "opacity-100" : "opacity-0"}`}>
-            Delete Task
-          </span>
-        </Button>
-        {/* Add more sidebar components as needed */}
-      </div>
     </div>
   );
 };
