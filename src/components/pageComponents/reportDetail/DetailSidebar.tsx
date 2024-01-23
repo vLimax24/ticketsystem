@@ -56,7 +56,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function SidebarItem({ icon, text, active, alert }: any) {
+export function SidebarItem({ icon, text, active, alert, action }: any) {
   const { expanded }: SidebarContextProps = useContext(SidebarContext);
 
   return (
@@ -71,6 +71,7 @@ export function SidebarItem({ icon, text, active, alert }: any) {
           : "hover:bg-indigo-50 text-gray-600"
       }
   `}
+  onClick={action}
     >
       {icon}
       <span
