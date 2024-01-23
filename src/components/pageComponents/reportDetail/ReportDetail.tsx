@@ -1,6 +1,6 @@
 import React from "react";
 import ReportDetailLayout from "./ReportDetailLayout";
-import Detail from "./Detail.tsx";
+import Detail from "./Detail";
 
 const ReportDetail = () => {
   return (

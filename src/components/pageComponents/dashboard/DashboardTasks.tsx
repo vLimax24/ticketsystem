@@ -14,7 +14,6 @@ const DashboardTasks = () => {
         return (
             <>
                 <div>
-                    <div className='text-[42px] ml-10'>Welcome back, <strong>{session?.user?.name}</strong></div>
                     <DashboardCard />
                 </div>
             </>

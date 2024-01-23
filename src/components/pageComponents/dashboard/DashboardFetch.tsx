@@ -38,6 +38,10 @@ const DashboardFetch: React.FC = () => {
   const [expandedDescription, setExpandedDescription] = useState<string | null>(null);
   const [email, setEmail] = useState("")
   const [newEmail, setNewEmail] = useState('')
+  const [filterOptions, setFilterOptions] = useState({
+    status: 'All',
+    relevance: 'All',
+  });
 
   const id = useSelector((state: any) => state.id.id);
   const dispatch = useDispatch();
@@ -47,15 +51,26 @@ const DashboardFetch: React.FC = () => {
       try {
         const response = await fetch('/api/tasks');
         const data: Report[] = await response.json();
-        const userReports = data.filter((report) => report.email === session?.user?.email);
-        setReports(userReports);
+        let filteredReports = data.filter((report) => report.email === session?.user?.email);
+    
+        // Apply status filter
+        if (filterOptions.status !== 'All') {
+          filteredReports = filteredReports.filter((report) => report.status === filterOptions.status);
+        }
+    
+        // Apply relevance filter
+        if (filterOptions.relevance !== 'All') {
+          filteredReports = filteredReports.filter((report) => report.relevance === filterOptions.relevance);
+        }
+    
+        setReports(filteredReports);
       } catch (error) {
         console.error('Error fetching reports:', error);
       }
     };
 
     fetchData();
-  }, [session]);
+  }, [session, filterOptions]);
 
   const idModifier = (reportId: string) => {
     // Dispatch the action to update the id in Redux store
@@ -78,9 +93,20 @@ const DashboardFetch: React.FC = () => {
     useEffect(() => {
     console.log(id)
   }, [id])
+
+  const handleFilterChange = (filterType: string, value: string) => {
+    setFilterOptions((prevOptions) => ({
+      ...prevOptions,
+      [filterType]: value,
+    }));
+  };
   
   return (
-    <div className='gap-0'>
+    <div className='gap-0 mt-10'>
+      <div className='flex items-center justify-between px-10'>
+        <div className='text-[42px]'>Welcome back, <strong>{session?.user?.name}</strong></div>
+        <DashboardFilter onFilterChange={handleFilterChange} />
+      </div>
       <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 max-w-full gap-0'>
         {reports.map(report => (
           <Card className="mx-10 my-10 overflow-hidden" key={report?._id}>
