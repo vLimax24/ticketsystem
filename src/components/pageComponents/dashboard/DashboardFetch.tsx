@@ -135,7 +135,7 @@ const DashboardFetch: React.FC = () => {
   };
   
   return (
-    <div className='gap-0'>
+    <div className='gap-0 mt-10'>
       <div className='flex items-center justify-between px-10'>
         <div className='text-[42px]'>Welcome back, <strong>{session?.user?.name}</strong></div>
         <DashboardFilter onFilterChange={handleFilterChange} />
