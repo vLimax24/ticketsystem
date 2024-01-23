@@ -16,6 +16,18 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSelector } from "react-redux";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+import {
   Check,
   Delete,
   Redo,
@@ -118,10 +130,29 @@ const Detail: React.FC = () => {
   return (
     <div className="flex min-h-screen w-full box-border mt-10">
       <DetailSidebar>
-        <SidebarItem
-          icon={<LayoutDashboard size={20} />}
-          text="Mark As Done"
-        />
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <button>
+          <SidebarItem
+            icon={<LayoutDashboard size={20} />}
+            text="Mark As Done"
+          />
+          </button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+      </AlertDialog>
         <SidebarItem icon={<UserCircle size={20} />} text="Re-Assign Task" />
         <SidebarItem icon={<UserCircle size={20} />} text="Share Task" />
         <SidebarItem icon={<BarChart3 size={20} />} text="Delete Task" />

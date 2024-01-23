@@ -1,6 +1,20 @@
 import React, { useContext, createContext, useState } from "react";
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "@/components/ui/button"
+
 
 interface SidebarContextProps {
   expanded: boolean;
@@ -33,10 +47,12 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3">
-          <img
+          <Image
             src={session?.user?.image}
             alt=""
             className="w-10 h-10 rounded-md"
+            width={40}
+            height={40}
           />
           <div
             className={`
@@ -45,8 +61,8 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
           `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold text-white">John Doe</h4>
-              <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+              <h4 className="font-semibold text-white">{session?.user?.name}</h4>
+              <span className="text-xs text-gray-600">{session?.user?.email}</span>
             </div>
             <MoreVertical size={20} />
           </div>
@@ -64,7 +80,7 @@ export function SidebarItem({ icon, text, active, alert, action }: any) {
       className={`
       relative flex items-center py-2 px-3 my-1
       font-medium rounded-md cursor-pointer
-      transition-colors group
+      transition-colors group max-h-11
       ${
         active
           ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-black"
