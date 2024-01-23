@@ -14,6 +14,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import DashboardFilter from './DashboardFilter';
 import Link from 'next/link';
 import Combobox from './Combobox';
 import { Badge } from '@/components/ui/badge';
