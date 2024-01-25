@@ -1,5 +1,6 @@
 import React, { useContext, createContext, useState } from "react";
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
+
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import {
@@ -31,8 +32,8 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   const { data: session, status }: { data: any, status: string } = useSession()
 
   return (
-    <aside className="h-screen text-black border-t">
-      <nav className="h-full flex flex-col bg-transparent border-r shadow-sm">
+    <aside className=" text-black left-0">
+      <nav className="flex flex-col bg-transparent shadow-sm">
         <div className="p-4 pb-2 flex justify-end items-center">
           <button
             onClick={() => setExpanded((curr) => !curr)}
@@ -46,7 +47,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="border-t flex p-3">
+        <div className="flex p-3">
           <Image
             src={session?.user?.image}
             alt=""

@@ -4,18 +4,7 @@ import { Button } from "@/components/ui/button";
 import DetailSidebar from "./DetailSidebar";
 import { SidebarItem } from "./DetailSidebar";
 import { useSession } from 'next-auth/react';
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardFooter,
-} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useSelector } from "react-redux";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,29 +16,14 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-
 import {
   Check,
-  Delete,
-  Redo,
-  LayoutDashboard,
-  BarChart3,
   UserCircle,
-  Boxes,
-  Package,
-  Receipt,
+  Trash2,
   Settings,
   LifeBuoy,
+  MousePointer2,
 } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 import {
   Dialog,
   DialogContent,
@@ -78,7 +52,6 @@ interface Report {
   status: string;
   date: string;
   email: string;
-  // Add more properties if needed
 }
 
 const Detail: React.FC = () => {
@@ -190,13 +163,13 @@ const Detail: React.FC = () => {
   }, [reportId]);
 
   return (
-    <div className="flex min-h-screen w-full box-border mt-10">
+    <div className="flex w-full box-border mt-10 left-0">
       <DetailSidebar>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <button className="block w-full">
               <SidebarItem
-                icon={<LayoutDashboard size={20} />}
+                icon={<Check size={20} />}
                 text="Mark As Done"
               />
             </button>
@@ -213,7 +186,7 @@ const Detail: React.FC = () => {
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  // markAsDone(reportId);
+                  // markAsDone(report?._id);
                 }}
               >
                 Ok
@@ -260,7 +233,7 @@ const Detail: React.FC = () => {
         </Dialog>
         <Dialog>
           <DialogTrigger className="block w-full">
-            <SidebarItem icon={<UserCircle size={20} />} text="Share Task" />
+            <SidebarItem icon={<MousePointer2 size={20} />} text="Share Task" />
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -289,7 +262,7 @@ const Detail: React.FC = () => {
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <button className="block w-full">
-              <SidebarItem icon={<BarChart3 size={20} />} text="Delete Task" />
+              <SidebarItem icon={<Trash2 size={20} />} text="Delete Task" />
             </button>
           </AlertDialogTrigger>
           <AlertDialogContent>
@@ -331,7 +304,7 @@ const Detail: React.FC = () => {
         </Dialog>
       </DetailSidebar>
       {/* Main Content */}
-      <div className="w-3/4 ml-5 md:ml-20">
+      <div className="w-3/4 ml-5 md:ml-20 mt-3.5">
         <h1 className="text-2xl font-bold">{report?.name}</h1>
         <div className="mt-5">
           <label className="block text-lg">Relevance</label>
@@ -366,7 +339,6 @@ const Detail: React.FC = () => {
           <label className="text-gray-400">{report?.description}</label>
         </div>
       </div>
-      {/* Sidebar */}
     </div>
   );
 };
