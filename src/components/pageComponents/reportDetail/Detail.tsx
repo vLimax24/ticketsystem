@@ -213,7 +213,7 @@ const Detail: React.FC = () => {
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction
                 onClick={() => {
-                  markAsDone(id);
+                  // markAsDone(reportId);
                 }}
               >
                 Ok
