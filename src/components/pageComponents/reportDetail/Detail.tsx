@@ -304,7 +304,7 @@ const Detail: React.FC = () => {
         </Dialog>
       </DetailSidebar>
       {/* Main Content */}
-      <div className="w-3/4 ml-5 md:ml-20 mt-3.5">
+      <div className="flex-1 ml-5 md:ml-20 mt-3.5">
         <h1 className="text-2xl font-bold">{report?.name}</h1>
         <div className="mt-5">
           <label className="block text-lg">Relevance</label>
