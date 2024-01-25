@@ -22,6 +22,7 @@ export const PUT = async (
       const { newEmail } = JSON.parse(requestBody);
 
       // Update the document in the database
+      // const updatedReport:any = await Report.findOneAndUpdate(
       const updatedReport:any = await Report.updateOne(
         { _id: id },
         { $set: { email: newEmail } },
