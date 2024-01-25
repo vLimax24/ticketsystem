@@ -305,39 +305,7 @@ const Detail: React.FC = () => {
       </DetailSidebar>
       {/* Main Content */}
       <div className="flex-1 ml-5 md:ml-20 mt-3.5">
-        <h1 className="text-2xl font-bold">{report?.name}</h1>
-        <div className="mt-5">
-          <label className="block text-lg">Relevance</label>
-          <Badge
-            className={`mt-2 ${getTailwindClasses(
-              report?.relevance
-            )} hover:cursor-pointer text-white`}
-          >
-            {report?.status ? capitalizeFirstLetter(report?.status) : ""}
-          </Badge>
-        </div>
-        <div className="mt-5">
-          <label className="block text-lg">Status</label>
-          <Badge
-            className={`mt-2 ${getTailwindClasses(
-              report?.status
-            )} hover:cursor-pointer text-white`}
-          >
-            {report?.status}
-          </Badge>
-        </div>
-        <div className="mt-5">
-          <label className="block text-lg">Email</label>
-          <label className="text-gray-400">{report?.email}</label>
-        </div>
-        <div className="mt-5">
-          <label className="block text-lg">Date</label>
-          <label className="text-gray-400">{report?.date}</label>
-        </div>
-        <div className="mt-5">
-          <label className="block text-lg">Description</label>
-          <label className="text-gray-400">{report?.description}</label>
-        </div>
+        <h1 className="text-3xl md:text-[3rem] lg:text-[4rem] lg:mt-2 font-bold">{report?.name}</h1>
       </div>
     </div>
   );

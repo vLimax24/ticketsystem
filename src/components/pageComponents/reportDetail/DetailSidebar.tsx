@@ -54,6 +54,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
             className="w-10 h-10 rounded-md"
             width={40}
             height={40}
+            draggable="false"
           />
           <div
             className={`
