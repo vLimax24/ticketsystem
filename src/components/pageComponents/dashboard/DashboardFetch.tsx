@@ -112,7 +112,7 @@ const DashboardFetch: React.FC = () => {
         {reports.map(report => (
           <Card className="mx-10 my-10 overflow-hidden" key={report?._id}>
             <CardHeader>
-              <CardTitle>{report.name}</CardTitle>
+              <CardTitle className='whitespace-nowrap text-ellipsis overflow-hidden'>{report.name}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid w-full items-center gap-4">
