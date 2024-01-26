@@ -8,7 +8,7 @@ const Comment = ({ content }: any) => {
   const { data: session } = useSession();
 
   return (
-    <div className="py-4 shadow-md border-b border-slate-800">
+    <div className="py-4 border-b border-slate-800">
       <div className="flex items-center mb-2">
         <Image
           src={session?.user?.image || '/public/logo.svg'}
@@ -16,6 +16,7 @@ const Comment = ({ content }: any) => {
           width={20}
           height={20}
           className="rounded-full mr-2"
+          draggable='false'
         />
         <strong>{session?.user?.name || 'Anonymous'}</strong>
       </div>

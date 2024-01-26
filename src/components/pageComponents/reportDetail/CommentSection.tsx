@@ -104,7 +104,7 @@ const CommentSection = () => {
 
   return (
     <div>
-      <h1 className="text-xl md:text-[1rem] lg:text-[2rem] font-bold h-fit mb-5 flex flex-col">Comments</h1>
+      <h1 className="text-xl md:text-[1rem] lg:text-[2rem] font-bold h-fit mb-3 flex flex-col">Comments</h1>
       {displayedComments.map((comment) => (
         <Comment key={comment.id} {...comment} />
       ))}

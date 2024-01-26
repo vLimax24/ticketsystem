@@ -21,10 +21,10 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   const { data: session, status }: { data: any, status: string } = useSession();
 
   return (
-    <aside className=" text-black left-0" onMouseEnter={() => setExpanded(true)} onMouseLeave={() => setExpanded(false)}>
-      <nav className="flex flex-col bg-transparent shadow-sm">
+    <aside className=" text-black left-0 transition-all duration-300" onMouseEnter={() => setExpanded(true)} onMouseLeave={() => setExpanded(false)}>
+      <nav className="flex flex-col bg-transparent shadow-sm transition-all duration-300">
         <SidebarContext.Provider value={{ expanded, setExpanded }}>
-          <ul className="px-3 h-[71vh]">{children}</ul>
+          <ul className="px-3 h-[71vh] transition-all duration-300">{children}</ul>
         </SidebarContext.Provider>
       </nav>
     </aside>
@@ -44,7 +44,8 @@ export function SidebarItem({ icon, text, active, alert, action }: any) {
       className={`
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer
-        transition-colors group max-h-11
+        group max-h-11
+        transition-all duration-300
         ${active ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-black" : "hover:bg-indigo-50 text-gray-600"}
       `}
       onClick={handleClick}

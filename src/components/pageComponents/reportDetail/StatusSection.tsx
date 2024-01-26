@@ -62,7 +62,7 @@ const StatusSection: React.FC<StatusSectionProps> = ({ id }) => {
 
   return (
     <>
-      <div className="mb-5">
+      <div className="mb-7">
         <h1 className="text-xl md:text-[1rem] lg:text-[2rem] font-bold h-fit">Status</h1>
       </div>
       <div className="flex items-center justify-between mb-10 gap-5">

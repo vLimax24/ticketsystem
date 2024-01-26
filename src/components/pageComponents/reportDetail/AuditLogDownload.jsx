@@ -3,6 +3,8 @@ import axios from 'axios';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
 import { FileSpreadsheet } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+
 
 const AuditLogDownload = ({ reportId }) => {
   const handleDownload = async () => {
@@ -36,13 +38,14 @@ const AuditLogDownload = ({ reportId }) => {
   };
 
   return (
-    <button
+    <Button
       onClick={handleDownload}
-      className="flex justify-between py-4 px-4 items-center w-full border-dashed border border-green-700 rounded-md transform transition-all duration-300 hover:scale-105 hover:bg-green-100 focus:outline-none focus:ring focus:border-blue-300"
+      className="w-full flex justify-center items-center px-5 py-10"
+      variant={'outline'}
     >
-      <FileSpreadsheet size={20} className="mr-2" />
+      <FileSpreadsheet size={20} className="mr-5" />
       <p className="font-semibold">Download Audit Log</p>
-    </button>
+    </Button>
   );
 };
 
