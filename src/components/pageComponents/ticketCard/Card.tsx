@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LoginTip from './loginTip/LoginTip'
 import { Button } from "@/components/ui/button"
 import {
@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { useSession } from 'next-auth/react'
 
 export function CardForm() {
     const [projectId, setProjectId] = useState("")
@@ -27,11 +28,18 @@ export function CardForm() {
     const [email, setEmail] = useState("")
     const [description, setDescription] = useState("")
     const [relevance, setRelevance] = useState("")
+    const [sender, setSender] = useState("")
     const [error, setError] = useState([])
     const [message, setMessage] = useState("")
 
+    const { data: session, status }: { data: any, status: string } = useSession();
+
+    const senderEmail = session?.user?.email || ''
+
+
     const handleSubmit = async (e:any) => {
         e.preventDefault();
+
     
         const res = await fetch('api/issues', {
           method: 'POST',
@@ -44,6 +52,7 @@ export function CardForm() {
             description: description,
             relevance: relevance,
             email: email,
+            senderEmail: senderEmail,
           }),
         });
         const { msg } = await res.json();
