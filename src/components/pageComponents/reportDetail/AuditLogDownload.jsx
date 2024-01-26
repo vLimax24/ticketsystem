@@ -1,10 +1,8 @@
-// components/AuditLogDownload.js
-
 import React from 'react';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
-import { FileSpreadsheet } from 'lucide-react'
+import { FileSpreadsheet } from 'lucide-react';
 
 const AuditLogDownload = ({ reportId }) => {
   const handleDownload = async () => {
@@ -40,11 +38,10 @@ const AuditLogDownload = ({ reportId }) => {
   return (
     <button
       onClick={handleDownload}
-      className="flex justify-between py-4 px-4 items-center w-full rounded-md 
-               text-white font-semibold shadow-md"
+      className="flex justify-between py-4 px-4 items-center w-full border-dashed border border-green-700 rounded-md transform transition-all duration-300 hover:scale-105 hover:bg-green-100 focus:outline-none focus:ring focus:border-blue-300"
     >
-      <FileSpreadsheet size={20} className="mr-2 bg-green-700" />
-      <p>Download Audit Log</p>
+      <FileSpreadsheet size={20} className="mr-2" />
+      <p className="font-semibold">Download Audit Log</p>
     </button>
   );
 };
