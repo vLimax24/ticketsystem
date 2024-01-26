@@ -59,6 +59,7 @@ import {
 } from "@/components/utils/utils";
 import { Badge } from "@/components/ui/badge";
 import { useParams } from "next/navigation";
+import AttachedFiles from "./AttachedFiles";
 
 interface Report {
   _id: string;
@@ -177,163 +178,174 @@ const Detail: React.FC = () => {
     fetchData();
   }, [reportId]);
 
+  const attachedFiles = [
+    { name: 'file1.txt' },
+    { name: 'file2.pdf' },
+    // Add more files as needed
+  ];
+
   return (
     <div className="flex w-full box-border mt-10 left-0 flex-col">
       <div className="flex justify-between">
-        <div className="flex">
-          <DetailSidebar>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <button className="block w-full">
-                  <SidebarItem
-                    icon={<Check size={20} />}
-                    text="Mark As Done"
-                  />
-                </button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your
-                    account and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      // markAsDone(report?._id);
-                    }}
-                  >
-                    Ok
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-            <Dialog>
-              <DialogTrigger className="block w-full">
-                <SidebarItem
-                  icon={<UserCircle size={20} />}
-                  text="Re-Assign Task"
-                />
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Re-Assign Task</DialogTitle>
-                  <DialogDescription></DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="username" className="text-right">
-                      Email
-                    </Label>
-                    <Input
-                      id="username"
-                      value={newEmail}
-                      className="col-span-3"
-                      placeholder="test@example.com"
-                      onChange={(e) => {
-                        setNewEmail(e.target.value);
+        <div className="flex flex-col">
+          <div className="flex h-fit">
+            <DetailSidebar>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <button className="block w-full">
+                    <SidebarItem
+                      icon={<Check size={20} />}
+                      text="Mark As Done"
+                    />
+                  </button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete your
+                      account and remove your data from our servers.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => {
+                        // markAsDone(report?._id);
                       }}
-                    />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <DialogClose asChild>
-                    <Button type="submit" onClick={reassignTask}>
-                      OK
-                    </Button>
-                  </DialogClose>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-            <Dialog>
-              <DialogTrigger className="block w-full">
-                <SidebarItem icon={<MousePointer2 size={20} />} text="Share Task" />
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Share Task</DialogTitle>
-                  <DialogDescription></DialogDescription>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
-                    <Label htmlFor="username" className="text-right">
-                      Email
-                    </Label>
-                    <Input
-                      id="username"
-                      value={sharedEmail}
-                      className="col-span-3"
-                      placeholder="test@example.com"
-                      onChange={(e) => {setSharedEmail(e.target.value)}}
-                    />
-                  </div>
-                </div>
-                <DialogFooter>
-                  <Button type="submit" onClick={shareTask}>OK</Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <button className="block w-full">
-                  <SidebarItem icon={<Trash2 size={20} />} text="Delete Task" />
-                </button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your
-                    account and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      deleteTask();
-                    }}
-                  >
-                    Ok
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-            <hr className="my-3" />
-            <SidebarItem icon={<Settings size={20} />} text="Edit Task" />
-            <Dialog>
-              <DialogTrigger className="block w-full">
-                <SidebarItem icon={<LifeBuoy size={20} />} text="Help" />
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Help</DialogTitle>
-                  <DialogDescription>
-                    Ticket System.
-                    <br />
-                    copyright@2024 all rights reserved
-                  </DialogDescription>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
-          </DetailSidebar>
-          <div className="ml-5 md:ml-20 mt-3.5">
-            <div className='flex flex-col'>
-              <h1 className="text-3xl md:text-[3rem] lg:text-[4rem] lg:mt-2 font-bold h-fit">{report?.name}</h1>
-              <Card className="w-fit max-w-[1000px] mt-20">
-                <CardHeader>
-                  <CardTitle className="text-[32px]">Description</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div>
-                      <h1>{report?.description}</h1>
+                    >
+                      Ok
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+              <Dialog>
+                <DialogTrigger className="block w-full">
+                  <SidebarItem
+                    icon={<UserCircle size={20} />}
+                    text="Re-Assign Task"
+                  />
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Re-Assign Task</DialogTitle>
+                    <DialogDescription></DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="username" className="text-right">
+                        Email
+                      </Label>
+                      <Input
+                        id="username"
+                        value={newEmail}
+                        className="col-span-3"
+                        placeholder="test@example.com"
+                        onChange={(e) => {
+                          setNewEmail(e.target.value);
+                        }}
+                      />
                     </div>
-                </CardContent>
-              </Card>
+                  </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button type="submit" onClick={reassignTask}>
+                        OK
+                      </Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              <Dialog>
+                <DialogTrigger className="block w-full">
+                  <SidebarItem icon={<MousePointer2 size={20} />} text="Share Task" />
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Share Task</DialogTitle>
+                    <DialogDescription></DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                      <Label htmlFor="username" className="text-right">
+                        Email
+                      </Label>
+                      <Input
+                        id="username"
+                        value={sharedEmail}
+                        className="col-span-3"
+                        placeholder="test@example.com"
+                        onChange={(e) => {setSharedEmail(e.target.value)}}
+                      />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit" onClick={shareTask}>OK</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <button className="block w-full">
+                    <SidebarItem icon={<Trash2 size={20} />} text="Delete Task" />
+                  </button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete your
+                      account and remove your data from our servers.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => {
+                        deleteTask();
+                      }}
+                    >
+                      Ok
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+              <hr className="my-3" />
+              <SidebarItem icon={<Settings size={20} />} text="Edit Task" />
+              <Dialog>
+                <DialogTrigger className="block w-full">
+                  <SidebarItem icon={<LifeBuoy size={20} />} text="Help" />
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Help</DialogTitle>
+                    <DialogDescription>
+                      Ticket System.
+                      <br />
+                      copyright@2024 all rights reserved
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+            </DetailSidebar>
+            <div className="ml-5 md:ml-20 mt-3.5">
+              <div className='flex flex-col'>
+                <h1 className="text-3xl md:text-[3rem] lg:text-[4rem] lg:mt-2 font-bold h-fit">{report?.name}</h1>
+                <Card className="w-fit max-w-[1000px] mt-20">
+                  <CardHeader>
+                    <CardTitle className="text-[32px]">Description</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                      <div>
+                        <h1>{report?.description}</h1>
+                      </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
+          </div>
+          <div>
+              <AttachedFiles files={attachedFiles}/>
           </div>
         </div>
         <div>
