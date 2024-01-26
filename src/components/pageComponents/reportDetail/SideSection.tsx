@@ -12,7 +12,7 @@ const SideSection: React.FC<StatusSectionProps> = ({ id }) => {
     <div className='flex flex-col mr-10'>
         <StatusSection id={id}/>
         <CommentSection />
-        <AuditLog />
+        <AuditLog reportId={id}/>
     </div>
   )
 }

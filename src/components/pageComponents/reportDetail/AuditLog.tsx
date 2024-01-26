@@ -1,5 +1,6 @@
 // components/AuditLog.js
 import React, { useState } from 'react';
+import AuditLogDownload from './AuditLogDownload'
 import {
   Table,
   TableBody,
@@ -11,7 +12,7 @@ import {
   TableFooter,
 } from "@/components/ui/table";
 
-const AuditLog = () => {
+const AuditLog = ({ reportId }:any) => {
   const [auditLog, setAuditLog] = useState([
     { id: 1, action: 'Created report', timestamp: '2024-01-26 10:30 AM' },
     { id: 2, action: 'Updated data', timestamp: '2024-01-26 11:15 AM' },
@@ -24,7 +25,7 @@ const AuditLog = () => {
   return (
     <div className="py-4 rounded shadow mt-5 max-h-[16rem] overflow-y-auto">
       <h1 className="text-xl md:text-[1rem] lg:text-[2rem] font-bold h-fit mb-5 flex flex-col">Audit Log</h1>
-      <Table>
+      {/* <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Action</TableHead>
@@ -39,7 +40,8 @@ const AuditLog = () => {
           </TableRow>
         ))}
       </TableBody>
-    </Table>
+    </Table> */}
+    <AuditLogDownload reportId={reportId}/>
     </div>
   );
 };
