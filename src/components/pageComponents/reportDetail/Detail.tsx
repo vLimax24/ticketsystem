@@ -39,6 +39,7 @@ import {
   Settings,
   LifeBuoy,
   MousePointer2,
+  Pen
 } from "lucide-react";
 import {
   Dialog,
@@ -187,8 +188,7 @@ const Detail: React.FC = () => {
   return (
     <div className="flex w-full box-border mt-10 left-0 flex-col">
       <div className="flex justify-between">
-        <div className="flex flex-col">
-          <div className="flex h-fit">
+        <div className="flex">
             <DetailSidebar>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
@@ -310,6 +310,10 @@ const Detail: React.FC = () => {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
+              <SidebarItem
+                    icon={<Pen size={20} />}
+                    text="Change Status"
+                  />
               <hr className="my-3" />
               <SidebarItem icon={<Settings size={20} />} text="Edit Task" />
               <Dialog>
@@ -342,11 +346,12 @@ const Detail: React.FC = () => {
                   </CardContent>
                 </Card>
               </div>
-            </div>
-          </div>
-          <div>
+
+
+
+
               <AttachedFiles files={attachedFiles}/>
-          </div>
+            </div>
         </div>
         <div>
           <SideSection id={reportId}/>
