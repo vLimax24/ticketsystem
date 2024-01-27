@@ -11,6 +11,18 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Send } from 'lucide-react'
+import { Input } from "@/components/ui/input"
+import { Textarea } from '@/components/ui/textarea';
+
 
 
 const commentsData = [
@@ -113,26 +125,29 @@ const CommentSection = () => {
           {`+ ${hiddenCommentsCount} more comments `}
         </p>
       )}
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button className='w-full mt-3' variant={'outline'}>
-          View all comments
-        </Button>
-      </SheetTrigger>
-      <SheetContent className='overflow-y-auto'>
-        <SheetHeader>
-          <SheetTitle>
-            <h1 className="text-xl md:text-[1rem] lg:text-[2rem] font-bold h-fit mb-5">Comments</h1>
-          </SheetTitle>
-          <div>
-          {commentsData.map((comment) => (
-            <Comment key={comment.id} {...comment} />
-          ))}
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button className='w-full mt-3' variant={'outline'}>
+            View all comments
+          </Button>
+        </SheetTrigger>
+        <SheetContent className='overflow-y-auto pl-0 pr-0 pb-0'>
+          <SheetHeader className='pl-6'>
+            <SheetTitle>
+              <h1 className="text-xl md:text-[1rem] lg:text-[2rem] font-bold h-fit mb-5">Comments</h1>
+            </SheetTitle>
+          </SheetHeader>
+          <div className='pl-6 pr-5'> {/* Adjusted margin */}
+            {commentsData.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))}
           </div>
-        </SheetHeader>
-      </SheetContent>
-    </Sheet>
-
+          <Card className='w-full p-5 flex flex-col mt-3 sticky bottom-0'> {/* Adjusted padding */}
+              <Input placeholder="Write a new comment..." className='w-full'/>
+              <Button className="mt-4">Send <Send size={15} className='ml-2'/></Button> {/* Adjusted margin */}
+          </Card>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };

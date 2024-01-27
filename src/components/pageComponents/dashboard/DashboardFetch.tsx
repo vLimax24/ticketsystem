@@ -171,10 +171,10 @@ const DashboardFetch: React.FC = () => {
               </div>
             </CardContent>
             <CardFooter className="flex justify-between w-full items-center">
-                <Link href={`/dashboard/${report?._id}`} className='w-full mr-5'>
-                  <Button className='w-full' onClick={() => idModifier(report?._id)}>See More</Button>
-                </Link>
-                <Combobox reportId={report?._id} onUpdateStatusLocally={updateStatusLocally} />
+              <Link href={`/dashboard/${report?._id}`} className='w-full mr-5'>
+                <Button className='w-full' onClick={() => idModifier(report?._id)}>See More</Button>
+              </Link>
+              {activeTab === 'inbox' && <Combobox reportId={report?._id} onUpdateStatusLocally={updateStatusLocally} />}
             </CardFooter>
           </Card>
           
