@@ -32,7 +32,7 @@ const issueSchema = new Schema<ReportModel>({
     status: {
         type: String,
         default: "PENDING",
-        required: [true, 'status is required']
+        required: [true, 'Status is required']
     },
     description: {
         type: String,
