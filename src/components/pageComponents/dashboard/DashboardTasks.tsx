@@ -24,7 +24,9 @@ const DashboardTasks = () => {
                 <div className='flex justify-center items-center flex-col mt-[10rem]'>
                     <h1 className='text-[32px] mb-10'>Please <strong>Login</strong> to continue</h1>
                     <div className='flex gap-5'>
-                        <Button onClick={() => signIn("github")} className='w-[10rem]'>Sign In</Button>
+                        <Link href={'/auth/login'}>
+                            <Button className='w-[10rem]'>Sign In</Button>
+                        </Link>
                         <Link href={'/'}>
                             <Button className='w-[10rem]'>Home</Button>
                         </Link>
