@@ -6,7 +6,7 @@ interface TicketCardLayoutProps {
 
 const TicketCardLayout: React.FC<TicketCardLayoutProps> = ({ children }) => {
   return (
-    <div className='flex justify-center items-center mt-10'>
+    <div className='grid place-items-center mt-10'>
         {children}
     </div>
   )

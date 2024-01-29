@@ -73,11 +73,11 @@ export function CardForm() {
   return (
     <>
     
-      <div className='flex flex-col'>
+      <div className='flex flex-col items-center justify-center'>
         <div className='mb-5'>
           <LoginTip />
         </div>
-        <Card className="w-[500px]">
+        <Card className="w-full md:w-[500px] mx-2">
           <CardHeader>
             {message && (
                 <div
