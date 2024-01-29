@@ -10,8 +10,8 @@ const Hero = () => {
         </h1>
         <h2 className='max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl'>Then this is the place to report it!</h2>
         <div className='flex mt-10 flex-col md:flex-row w-full px-3 md:justify-center md:items-center '>
-            <Link href={'/report'} className="mr-3">
-                <Button className='w-full my-1 md:mx-2'>
+            <Link href={'/report'} className="md:mr-3">
+                <Button className='w-full my-1'>
                     Report an Issue
                 </Button>
             </Link>
