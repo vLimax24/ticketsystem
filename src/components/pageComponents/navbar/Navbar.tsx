@@ -30,26 +30,38 @@ const Navbar = () => {
           <Menu size={20} />
         </div>
       </NavbarLayout>
-      {sidebarOpen && (
-        <div className='fixed inset-0 flex z-50'>
-          <div className='fixed inset-0 bg-black' onClick={toggleSidebar}></div>
-          <div className='flex-none w-64 bg-white shadow-xl transform transition-transform ease-in-out duration-300 -translate-x-full md:relative md:translate-x-0'>
-            {/* Sidebar content */}
-            <nav className='p-4'>
-              <ul>
-                {/* Add your sidebar links here */}
-                <li>
-                  <a href='#' className='block py-2 px-4 hover:bg-gray-200'>Link 1</a>
-                </li>
-                <li>
-                  <a href='#' className='block py-2 px-4 hover:bg-gray-200'>Link 2</a>
-                </li>
-                {/* Add more links as needed */}
-              </ul>
-            </nav>
-          </div>
+      <div
+        className={`${sidebarOpen ? 'translate-x-0' : 'translate-x-full'
+          } fixed top-0 left-0 h-full w-full bg-primary transition-transform duration-500 ease-in-out overflow-hidden text-[#FFF] z-[999999]`}
+      >
+        <div className="flex justify-end p-4 transition-all duration-300 mr-3">
+          <button className="text-black font-bold text-[32px] hover:rotate-[90deg] transition-all duration-500" onClick={toggleSidebar}>
+            &#10006;
+          </button>
         </div>
-      )}
+        <ul className="flex flex-col items-end mr-4">
+          <li className="m-3">
+            <a href="#" className="text-[3em] text-black font-black">
+              About
+            </a>
+          </li>
+          <li className="m-3">
+            <a href="#" className="text-[3em] text-black font-black">
+              Projects
+            </a>
+          </li>
+          <li className="m-3">
+            <a href="#" className="text-[3em] text-black font-black">
+              Contact
+            </a>
+          </li>
+          <li className="m-3">
+            <a href="#" className="text-[3em] text-black font-black">
+              Techstack
+            </a>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };
