@@ -74,7 +74,7 @@ export function CardForm() {
     <>
     
       <div className='flex flex-col items-center justify-center m-4'>
-        <div className='mb-5 w-[97%]'>
+        <div className='mb-5 w-full md:w-[97%]'>
           <LoginTip />
         </div>
         <Card className="w-full md:w-[500px] mx-2">
