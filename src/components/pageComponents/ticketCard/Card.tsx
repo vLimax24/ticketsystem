@@ -91,7 +91,7 @@ export function CardForm() {
         <div className="mb-5">
           <LoginTip />
         </div>
-        <Card className="w-[500px]">
+        <Card className="w-full md:w-[500px] mx-2">
           <CardHeader>
             {message && (
               <div

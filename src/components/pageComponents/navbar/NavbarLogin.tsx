@@ -26,7 +26,12 @@ const NavbarLogin = (): JSX.Element => {
         );
       }
     
-      return <Button onClick={() => signIn("github")} className='mr-10'>Sign In</Button>;
+      return (
+        <Link href={'/auth/login'}>
+          <Button className='mr-10'>Sign In</Button>
+        </Link>
+        
+      )
 }
 
 export default NavbarLogin
