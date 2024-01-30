@@ -21,7 +21,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   const { data: session, status }: { data: any, status: string } = useSession();
 
   return (
-    <aside className=" text-black left-0 transition-all duration-300" onMouseEnter={() => setExpanded(true)} onMouseLeave={() => setExpanded(false)}>
+    <aside className="text-black left-0 transition-all duration-300" onMouseEnter={() => setExpanded(true)} onMouseLeave={() => setExpanded(false)}>
       <nav className="flex flex-col bg-transparent shadow-sm transition-all duration-300">
         <SidebarContext.Provider value={{ expanded, setExpanded }}>
           <ul className="px-3 h-[71vh] transition-all duration-300">{children}</ul>
