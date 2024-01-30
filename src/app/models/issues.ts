@@ -10,6 +10,7 @@ interface ReportModel {
     description: string;
     relevance: string;
     date: Date;
+    files: any;
 }
 
 const issueSchema = new Schema<ReportModel>({
