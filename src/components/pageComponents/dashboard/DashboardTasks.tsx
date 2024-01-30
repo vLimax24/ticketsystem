@@ -13,7 +13,7 @@ const DashboardTasks = () => {
     } else if(status === 'authenticated') {
         return (
             <>
-                <div>
+                <div className=''>
                     <DashboardCard />
                 </div>
             </>

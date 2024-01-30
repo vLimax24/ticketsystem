@@ -128,13 +128,13 @@ const DashboardFetch: React.FC = () => {
   
   return (
     <div className='gap-0 mt-10'>
-      <div className='flex items-center justify-between px-10'>
-        <div className='flex items-center'>
+      <div className='flex items-start lg:items-center justify-between px-10 flex-col lg:flex-row'>
+        <div className='flex items-start lg:items-center flex-col lg:flex-row'>
         <div className='flex flex-col justify-center'>
         <div className='text-[42px]'>Welcome back, <strong>{session?.user?.name}</strong></div>
         <CardDescription className='text-lg'>Here you can view the reports you {activeTab === 'inbox' ? 'received' : 'sent'}</CardDescription>
         </div>
-        <Tabs defaultValue="inbox" className="w-[400px] ml-10 mt-2">
+        <Tabs defaultValue="inbox" className="lg:w-[400px] lg:ml-10 my-10 lg:my-2 w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="inbox" onClick={() => setActiveTab('inbox')}>Inbox</TabsTrigger>
             <TabsTrigger value="outbox" onClick={() => setActiveTab('outbox')}>Outbox</TabsTrigger>
