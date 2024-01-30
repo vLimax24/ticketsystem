@@ -10,6 +10,7 @@ interface ReportModel {
     description: string;
     relevance: string;
     date: Date;
+    files: any;
 }
 
 const issueSchema = new Schema<ReportModel>({
@@ -42,9 +43,15 @@ const issueSchema = new Schema<ReportModel>({
         type: String,
         required: [true, 'Relevance is required'],
     },
+
     date: {
         type: Date,
         default: Date.now,
+    },
+
+    files: {
+        type: Array,
+        default: []
     }
 })
 

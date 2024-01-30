@@ -1,12 +1,26 @@
 {
     "version": "0.2.0",
     "configurations": [
-      {
-        "name": "Launch Chrome",
-        "type": "chrome",
-        "request": "launch",
-        "url": "http://localhost:3000",
-        "webRoot": "${workspaceFolder}"
-      }
+        {
+            "name": "Next.js Frontend",
+            "type": "pwa-chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Next.js Backend",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/next",
+            "args": [
+                "dev"
+            ],
+            "cwd": "${workspaceFolder}",
+            "protocol": "inspector",
+            "env": {
+                "NODE_ENV": "development"
+            }
+        }
     ]
-  }
+}
