@@ -180,7 +180,7 @@ const Detail: React.FC = () => {
 
   return (
     <div className="flex w-full box-border mt-10 left-0 flex-col">
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-col lg:flex-row">
         <div className="flex">
           <DetailSidebar>
             <AlertDialog>
