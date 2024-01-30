@@ -11,8 +11,8 @@ import Providers from '../redux/Provider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Devonit',
-  description: 'Official Homepage of Devonit',
+  title: 'Weftune',
+  description: 'Official Homepage of Weftune',
 }
 
 export default function RootLayout({
