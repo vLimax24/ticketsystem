@@ -48,7 +48,10 @@ const issueSchema = new Schema<ReportModel>({
         type: Date,
         default: Date.now,
     },
-
+    comments: {
+        type: Array,
+        default: [],
+    },
     files: {
         type: Array,
         default: []
