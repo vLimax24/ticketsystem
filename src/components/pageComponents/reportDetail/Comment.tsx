@@ -1,6 +1,5 @@
-// components/Comment.js
+// Comment.js
 import React from 'react';
-import { AiOutlineEye } from 'react-icons/ai';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
