@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 
 
 @layer base {
@@ -51,13 +51,34 @@
   }
 }
 
- 
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
+
+@layer base {
+
+  /* HTML: <div class="loader"></div> */
+  .loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #020109;
+    -webkit-mask: radial-gradient(circle closest-side at 50% 40%, #0000 94%, #000);
+    transform-origin: 50% 40%;
+    animation: l25 1s infinite linear;
+  }
+
+  @keyframes l25 {
+    100% {
+      transform: rotate(1turn)
+    }
+  }
+}

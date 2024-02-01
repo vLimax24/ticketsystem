@@ -33,6 +33,7 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import LoadingOverlay from "../hero/LoadingOverlay";
 
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -44,11 +45,14 @@ export function CardForm() {
   const [description, setDescription] = useState("");
   const [relevance, setRelevance] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false)
 
   const [files, setFiles] = useState<File[]>([]);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    setLoading(true)
 
     const formData = new FormData();
 
@@ -70,6 +74,9 @@ export function CardForm() {
       // },
       body: formData,
     });
+
+    setLoading(false)
+    
     const { msg } = await res.json();
     setMessage(msg); // Set the message based on the response
 
@@ -91,6 +98,7 @@ export function CardForm() {
         <div className="mb-5">
           <LoginTip />
         </div>
+        {loading && <LoadingOverlay />}
         <Card className="w-full md:w-[500px] mx-2">
           <CardHeader>
             {message && (

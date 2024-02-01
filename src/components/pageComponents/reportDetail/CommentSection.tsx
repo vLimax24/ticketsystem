@@ -111,8 +111,26 @@ const commentsData = [
 
 const CommentSection = () => {
   const [showAllComments, setShowAllComments] = useState(false);
+  const [comment, setComment] = useState("")
   const displayedComments = showAllComments ? commentsData : commentsData.slice(0, 2);
   const hiddenCommentsCount = commentsData.length - displayedComments.length;
+
+  const submitComment = async () => {
+    const data = {
+      id: 4,
+      author: 'Jane Smith',
+      content: 'I totally agree with John!',
+      likes: 3,
+    }
+
+    const res = await fetch('', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+  }
 
   return (
     <div>
@@ -143,8 +161,8 @@ const CommentSection = () => {
             ))}
           </div>
           <Card className='w-full p-5 flex flex-col mt-3 sticky bottom-0'> {/* Adjusted padding */}
-              <Input placeholder="Write a new comment..." className='w-full'/>
-              <Button className="mt-4">Send <Send size={15} className='ml-2'/></Button> {/* Adjusted margin */}
+              <Input name="comment" value={comment} onChange={(e)=>{setComment(e.target.value)}} placeholder="Write a new comment..." className='w-full'/>
+              <Button className="mt-4" onClick={submitComment}>Send <Send size={15} className='ml-2'/></Button> {/* Adjusted margin */}
           </Card>
         </SheetContent>
       </Sheet>
