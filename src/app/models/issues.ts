@@ -9,6 +9,7 @@ interface ReportModel {
     status: string;
     description: string;
     relevance: string;
+    comments: any;
     date: Date;
     files: any;
 }
