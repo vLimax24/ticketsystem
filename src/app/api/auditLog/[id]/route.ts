@@ -1,7 +1,19 @@
-// pages/api/auditLog.ts
+// pages/api/auditLog/[id].ts
 import { NextResponse } from 'next/server';
 import connect from '../../../lib/db';
 import AuditLogModel from '../../../models/auditLog';
+
+export const generateStaticParams = async () => {
+  // Fetch dynamic IDs from your database or any other source
+  try {
+    await connect();
+    const logs = await AuditLogModel.find({}, { _id: 1 }); // Fetch all IDs for example
+    return logs.map((log:any) => ({ params: { id: log._id.toString() } }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
+};
 
 export const GET = async (
   request: Request,
