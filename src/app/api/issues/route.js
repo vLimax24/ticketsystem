@@ -1,39 +1,38 @@
-import { NextResponse } from 'next/server'
-import connect from '../../lib/db'
-import Report from '../../models/issues'
-import mongoose from 'mongoose'
-import ImageKit from 'imagekit'
+import { NextResponse } from "next/server";
+import connect from "../../lib/db";
+import Report from "../../models/issues";
+import mongoose from "mongoose";
+import ImageKit from "imagekit";
 
-import util from 'util';
+import util from "util";
 
 export async function POST(req) {
   // const { projectId, name, description, relevance, email } = await req.json()
 
   const formData = await req.formData();
 
-  const projectId = formData.get("projectId")
-  const name = formData.get("name")
-  const email = formData.get("email")
-  const description = formData.get("description")
-  const relevance = formData.get("relevance")
-  const message = formData.get("message")
-  const files = formData.getAll("files")
-
+  const projectId = formData.get("projectId");
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const description = formData.get("description");
+  const relevance = formData.get("relevance");
+  const message = formData.get("message");
+  const files = formData.getAll("files");
 
   for (const [name, value] of formData.entries()) {
-    console.log(name, value)
+    console.log(name, value);
   }
-  
+
   const imagekit = new ImageKit({
-    publicKey: process.env.PUBLICK_KEY,
+    publicKey: process.env.PUBLIC_KEY,
     privateKey: process.env.PRIVATE_KEY,
     urlEndpoint: process.env.URLENDPOINT,
   });
 
-  imagekit.uploadPromise = util.promisify(imagekit.upload)
+  imagekit.uploadPromise = util.promisify(imagekit.upload);
 
   try {
-    let uploadedFiles = []
+    let uploadedFiles = [];
 
     for (const file of files) {
       let buffer = Buffer.from(await file.arrayBuffer());
@@ -43,7 +42,7 @@ export async function POST(req) {
         file: buffer,
         isPrivateFile: false,
         useUniqueFileName: true,
-        tags: ["tag1", "tag2"]
+        tags: ["tag1", "tag2"],
       };
 
       try {
@@ -51,19 +50,24 @@ export async function POST(req) {
         uploadedFiles.push({
           fileName: file.name,
           fileId: result.fileId,
-          url: result.url
-        })
-      } catch (error) {
-
-      }
+          url: result.url,
+        });
+      } catch (error) {}
     }
 
-    await connect()
-    await Report.create({ projectId, name, description, relevance, email, files:uploadedFiles })
+    await connect();
+    await Report.create({
+      projectId,
+      name,
+      description,
+      relevance,
+      email,
+      files: uploadedFiles,
+    });
 
     return NextResponse.json({
-      msg: ['Message sent successfully']
-    })
+      msg: ["Message sent successfully"],
+    });
   } catch (error) {
     if (error instanceof mongoose.Error.ValidationError) {
       let errorList = [];
